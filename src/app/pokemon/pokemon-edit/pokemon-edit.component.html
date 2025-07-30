@@ -70,10 +70,17 @@
                     =$index) {
                     <button
                       type="button"
-                      class="btn btn-secondary btn-sm rounded-pill me-2"
+                      class="btn btn-secondary btn-sm rounded-pill m-1"
                       (click)="pokemonTypeList.removeAt(index)"
+                      [style.backgroundColor]="getPokemonColor(type.value)"
+                      [style.color]="getChipTextColor(type.value)"
                     >
-                      {{ type.value }} <span class="badge">x</span>
+                      {{ type.value }}
+                      <span
+                        class="badge"
+                        [style.color]="getChipTextColor(type.value)"
+                        >x</span
+                      >
                     </button>
                     }
                     <div class="row mt-3">

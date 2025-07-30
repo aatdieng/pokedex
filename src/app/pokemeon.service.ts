@@ -27,7 +27,7 @@ export class PokemeonService {
       'Electrik',
       'Poison',
       'Vol',
-      'Fee',
+      'Fée',
     ];
   }
 }

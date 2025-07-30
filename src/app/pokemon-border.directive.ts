@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, input } from '@angular/core';
+import { getPokemonColor } from './pokemon.model';
 
 @Directive({
   selector: '[appPokemonBorder]',
@@ -14,7 +15,7 @@ export class PokemonBorderDirective {
   }
 
   @HostListener('mouseenter') onMouseEnter() {
-    const color = this.getBorderColor();
+    const color = getPokemonColor(this.pokemonType());
     this.setBorder(color);
   }
 
