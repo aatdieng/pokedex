@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-pokemon-list',
   imports: [PokemonBorderDirective, DatePipe, RouterLink],
   templateUrl: './pokemon-list.component.html',
-  styles: ``,
+  styles: `.pokemon-card{cursor:pointer}`,
 })
 export class PokemonListComponent {
   readonly #pokemonService = inject(PokemeonService);
@@ -32,13 +32,5 @@ export class PokemonListComponent {
       return 'Grand';
     }
     return 'Moyen';
-  }
-
-  incrementerLife(pokemon: Pokemon) {
-    pokemon.life = pokemon.life + 1;
-  }
-
-  decrementerLife(pokemon: Pokemon) {
-    pokemon.life = pokemon.life - 1;
   }
 }

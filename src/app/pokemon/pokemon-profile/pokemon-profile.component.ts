@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PokemeonService } from '../../pokemeon.service';
 import { DatePipe } from '@angular/common';
+import { getPokemonColor } from '../../pokemon.model';
 
 @Component({
   selector: 'app-pokemon-profile',
@@ -18,4 +19,13 @@ export class PokemonProfileComponent {
   readonly pokemon = signal(
     this.#pokemonService.getPokemonById(this.#pokemonId)
   );
+
+   getPokemonColor(type: string): string {
+      return getPokemonColor(type);
+    }
+
+    getChipTextColor(type: string): 'black' | 'white' {
+      return type === 'Electrik' ? 'black' : 'white';
+    }
 }
+ 
