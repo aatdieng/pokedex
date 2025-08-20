@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PokemeonService } from '../../pokemeon.service';
 import { DatePipe } from '@angular/common';
 import { getPokemonColor } from '../../pokemon.model';
@@ -12,6 +12,7 @@ import { getPokemonColor } from '../../pokemon.model';
 })
 export class PokemonProfileComponent {
   readonly #route = inject(ActivatedRoute);
+  readonly #router = inject(Router);
   readonly #pokemonService = inject(PokemeonService);
 
   readonly #pokemonId = Number(this.#route.snapshot.paramMap.get('id'));
@@ -20,12 +21,17 @@ export class PokemonProfileComponent {
     this.#pokemonService.getPokemonById(this.#pokemonId)
   );
 
-   getPokemonColor(type: string): string {
-      return getPokemonColor(type);
-    }
+  getPokemonColor(type: string): string {
+    return getPokemonColor(type);
+  }
 
-    getChipTextColor(type: string): 'black' | 'white' {
-      return type === 'Electrik' ? 'black' : 'white';
-    }
+  getChipTextColor(type: string): 'black' | 'white' {
+    return type === 'Electrik' ? 'black' : 'white';
+  }
+
+  deletePokemon() {
+    this.#pokemonService.deletePokemon(this.#pokemonId).subscribe(() => {
+      this.#router.navigate(['/pokemons']);
+    });
+  }
 }
- 

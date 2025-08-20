@@ -97,5 +97,19 @@ export class PokemonEditComponent {
   getChipTextColor(type: string): 'black' | 'white' {
     return type === 'Electrik' ? 'black' : 'white';
   }
-  onSubmit() {}
+  onSubmit() {
+
+    const isFormValid= this.form.valid;
+    const pokemon = this.pokemon();
+
+    if(isFormValid && pokemon){
+      const updatedPokemon = {
+        ...pokemon,
+        name: this.pokemonName.value,
+        life : this.pokemonLife.value,
+        damage : this.pokemonDamage.value,
+        types: this.pokemonTypeList.value
+      };
+    }
+  }
 }

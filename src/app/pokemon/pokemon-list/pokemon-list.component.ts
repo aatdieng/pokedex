@@ -4,6 +4,7 @@ import { PokemeonService } from '../../pokemeon.service';
 import { PokemonBorderDirective } from '../../pokemon-border.directive';
 import { Pokemon } from '../../pokemon.model';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,8 +14,11 @@ import { RouterLink } from '@angular/router';
 })
 export class PokemonListComponent {
   readonly #pokemonService = inject(PokemeonService);
-  readonly pokemonList = signal(this.#pokemonService.getPokemonList());
+  readonly pokemonList = toSignal(this.#pokemonService.getPokemonList(), {
+    initialValue: [],
+  });
   readonly searchTerm = signal('');
+
   readonly pokemonListFiltered = computed(() => {
     const searchTerm = this.searchTerm();
     const pokemonList = this.pokemonList();
@@ -22,6 +26,8 @@ export class PokemonListComponent {
       x.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
     );
   });
+
+  readonly loading = computed(()=>this.pokemonList().length ===0)
 
   size(pokemon: Pokemon) {
     if (pokemon.life <= 15) {

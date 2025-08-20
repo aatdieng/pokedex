@@ -55,7 +55,10 @@
               [routerLink]="['/pokemons/edit', pokemon().id]"
             >
               EDITER</button
-            ><button class="btn btn-link text-decoration-none text-warning">
+            ><button
+              (click)="deletePokemon()"
+              class="btn btn-link text-decoration-none text-warning"
+            >
               SUPPRIMER
             </button>
           </div>
